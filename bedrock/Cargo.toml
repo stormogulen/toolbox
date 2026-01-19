@@ -1,0 +1,12 @@
+[workspace]
+members = [
+    "raw_bytes",
+    "packed_bits",
+    "packed_structs",
+    "packed_data",
+    "save",
+    "fixed_point",
+    "mtf",
+]
+
+resolver = "2"

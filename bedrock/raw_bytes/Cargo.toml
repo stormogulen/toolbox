@@ -1,0 +1,51 @@
+[package]
+name = "raw_bytes"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+bytemuck = "1.24.0"
+bytemuck_derive = "1.10.2"
+thiserror = { version = "2.0.17", optional = true }
+memmap2 = { version = "0.8", optional = true }
+tempfile = { version = "3.6", optional = true }
+proptest = "1.9.0"
+rand = "0.9.2"
+
+[features]
+default = ["std"]
+std = ["thiserror", "tempfile"]
+mmap = ["std", "memmap2"]
+
+[[example]]
+name = "01_basic_in_memory"
+path = "examples/01_basic_in_memory.rs"
+
+[[example]]
+name = "02_bulk_operations"
+path = "examples/02_bulk_operations.rs"
+
+[[example]]
+name = "03_index_syntax"
+path = "examples/03_index_syntax.rs"
+
+[[example]]
+name = "04_mmap_readonly"
+path = "examples/04_mmap_readonly.rs"
+required-features = ["mmap"]
+
+[[example]]
+name = "05_mmap_readwrite"
+path = "examples/05_mmap_readwrite.rs"
+required-features = ["mmap"]
+
+[[example]]
+name = "06_performance_comparison"
+path = "examples/06_performance_comparison.rs"
+
+[dev-dependencies]
+criterion = "0.5"
+
+[[bench]]
+name = "access_patterns"
+harness = false

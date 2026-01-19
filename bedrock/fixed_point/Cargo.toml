@@ -1,0 +1,22 @@
+[package]
+name = "fixed_point"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+bytemuck = "1.24.0"
+bytemuck_derive = "1.10.2"
+thiserror = { version = "2.0.17", optional = true }
+packed_bits = { path = "../packed_bits", optional = true }
+half = { version = "2.7.1", optional = true }
+
+[dev-dependencies]
+proptest = "1.9.0"
+packed_bits = { path = "../packed_bits" }
+
+
+[features]
+std_container = ["thiserror"]
+default = ["std_container"]
+packed_container = ["packed_bits"]
+half_support = ["half"]
