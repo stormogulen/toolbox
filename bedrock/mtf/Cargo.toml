@@ -1,0 +1,13 @@
+[package]
+name = "mtf"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+thiserror = "1.0"
+bytemuck = "1.14"
+mtf_derive = { path = "../mtf_derive", optional = true }
+
+[features]
+default = ["derive"]
+derive = ["dep:mtf_derive"]

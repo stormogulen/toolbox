@@ -1,0 +1,25 @@
+[package]
+name = "packed_bits"
+version = "0.1.0"
+edition = "2024"
+[dependencies]
+bytemuck = "1.24.0"
+bytemuck_derive = "1.10.2"
+thiserror = { version = "2.0.17", optional = true }
+
+# This crate depends on raw_bytes for the underlying buffer logic
+raw_bytes = { version = "0.1", path = "../raw_bytes", default-features = false, features = [
+] }
+
+#proptest = { version = "1.9.0", optional = true }
+
+[features]
+default = ["std", "container"]
+std = ["thiserror", "raw_bytes/std"]
+mmap = ["std", "raw_bytes/mmap"]
+container = []
+
+# Enables property-based testing for users
+
+[dev-dependencies]
+proptest = "1.9.0"
