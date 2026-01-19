@@ -1,0 +1,33 @@
+[package]
+name = "packed_structs"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+bytemuck = "1.24.0"
+bytemuck_derive = "1.10.2"
+thiserror = { version = "2.0.17", optional = true }
+
+# This crate depends on raw_bytes for the underlying buffer logic
+raw_bytes = { version = "0.1", path = "../raw_bytes", default-features = false, optional = true }
+
+# Optional dependency for bit-field operations
+packed_bits = { version = "0.1", path = "../packed_bits", default-features = false, optional = true }
+
+[features]
+default = ["std", "container"]
+std = ["thiserror", "raw_bytes?/std", "packed_bits?/std"]
+mmap = ["std", "container", "raw_bytes/mmap"]
+container = ["std", "raw_bytes"]
+bits = ["packed_bits"]                                    # Enable bit-field operations
+
+[dev-dependencies]
+proptest = "1.9.0"
+
+[[example]]
+name = "packed_structs"
+required-features = ["container"]
+
+[[example]]
+name = "bit_fields"
+required-features = ["bits"]

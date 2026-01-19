@@ -1,0 +1,17 @@
+[package]
+name = "save"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+thiserror = "2.0.17"
+bytemuck = { version = "1.24.0" }
+bytemuck_derive = "1.10.2"
+raw_bytes = { path = "../raw_bytes" }
+packed_structs = { path = "../packed_structs" }
+sha2 = "0.10.9"
+blake3 = "1.5"
+
+[features]
+default = ["std"]
+std = []

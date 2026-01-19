@@ -1,0 +1,34 @@
+[package]
+name = "packed_data"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+raw_bytes = { path = "../raw_bytes" }
+packed_bits = { path = "../packed_bits" }
+packed_structs = { path = "../packed_structs" }
+fixed_point = { path = "../fixed_point" }
+mtf = { path = "../mtf" }
+#save = { path = "../save" }
+save = { path = "../save", optional = true }
+bytemuck = "1.14"
+
+[dev-dependencies]
+criterion = "0.5"
+
+[features]
+default = ["derive", "verified"]
+derive = ["mtf/derive"]
+verified = ["save"]
+
+[[example]]
+name = "quick_start"
+path = "examples/quick_start.rs"
+
+[[example]]
+name = "game_state"
+path = "examples/game_state.rs"
+
+[[example]]
+name = "verified_save"
+path = "examples/verified_save.rs"
