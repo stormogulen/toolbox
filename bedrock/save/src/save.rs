@@ -35,6 +35,29 @@ impl From<std::io::Error> for SaveError {
     }
 }
 
+use std::fmt;
+
+impl fmt::Display for SaveError {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        match self {
+            SaveError::Io(e) => write!(f, "I/O error: {}", e),
+            SaveError::InvalidMagic => write!(f, "Invalid SAVE magic"),
+            SaveError::InvalidVersion => write!(f, "Unsupported SAVE version"),
+            SaveError::HashMismatch => write!(f, "Merkle hash mismatch"),
+        }
+    }
+}
+
+impl std::error::Error for SaveError {
+    fn source(&self) -> Option<&(dyn std::error::Error + 'static)> {
+        match self {
+            SaveError::Io(e) => Some(e),
+            _ => None,
+        }
+    }
+}
+
+
 /// Save a slice of POD elements to a writer.
 pub fn save<T: Pod, W: Write>(writer: &mut W, data: &[T]) -> Result<(), SaveError> {
     let bytes = cast_slice(data);

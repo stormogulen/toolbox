@@ -84,7 +84,7 @@ pub use raw_bytes::{Container, Storage, ContainerError};
 #[cfg(feature = "verified")]
 pub use save::{
     save, load,
-    merkle::MerkleNode, merkle::build_merkle_tree, merkle::verify_merkle_tree,
+    //merkle::MerkleNode, merkle::build_merkle_tree, merkle::verify_merkle_tree,
 };
 
 // Re-export for convenience

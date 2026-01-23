@@ -67,7 +67,8 @@ where
     P: AsRef<Path>,
 {
     let container = packed_structs::PackedStructContainer::from_slice(data);
-    save::save(path, &container)
+    save::save_to_file(path, &container)
+        .map_err(|e| io::Error::new(io::ErrorKind::Other, e))
 }
 
 /// Load with Merkle tree verification (requires 'verified' feature)
@@ -79,7 +80,8 @@ where
     T: Pod + Copy,
     P: AsRef<Path>,
 {
-    let container = save::load(path)?;
+    let container = save::load_from_file(path)
+        .map_err(|e| io::Error::new(io::ErrorKind::Other, e))?;
     Ok(container.as_slice().to_vec())
 }
 
